@@ -1,0 +1,169 @@
+---
+title: "Untitled"
+author: "Ye In Jeon"
+date: "February 14, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Correlation
+
+
+```{r oecd}
+getwd()
+setwd("C:/Users/Krystin/Documents/GW/Science")
+oecd <- data.frame(read.csv('OECD_151617.csv'))
+summary(oecd)
+
+
+which( colnames(oecd)=="Dwellings.without.basic.facilities" ) 
+cor(oecd[,5:28])
+```
+
+```{r oecdhistograms}
+
+hist(oecd$Housing.expenditure)
+#almost normal distirubtion if we ignore the left outlier
+hist(oecd$Rooms.per.person)
+#median looks to be around 2
+hist(oecd$Dwellings.without.basic.facilities)
+#not a normal distribution
+hist(oecd$Household.net.adjusted.disposable.income)
+#majority between 10000 and 40000
+hist(oecd$Household.net.financial.wealth)
+#very different distributioin then disposable income
+hist(oecd$Labour.market.insecurity)
+#distirubtion follows similar pattern to financial wealth
+hist(oecd$Employment.rate)
+#most between 60 and 75
+hist(oecd$Long.term.unemployment.rate)
+#right skewed
+hist(oecd$Personal.earnings)
+#almost normally distirubted
+hist(oecd$Quality.of.support.network)
+#left skewed
+hist(oecd$Educational.attainment)
+#left skewed
+hist(oecd$Student.skills)
+#left skewed
+hist(oecd$Years.in.education)
+#more normal than other education variablbes
+hist(oecd$Air.pollution)
+#slightly right skewed
+hist(oecd$Water.quality)
+#slightly left skewed
+hist(oecd$Stakeholder.engagement.for.developing.regulations)
+#distribution is relativley flat
+hist(oecd$Voter.turnout)
+#relativley normally distirubted
+hist(oecd$Life.expectancy)
+#mostly in 80-85 bucket
+hist(oecd$Self.reported.health)
+#mostly in 60-70 bucket
+hist(oecd$Life.satisfaction)
+#between 4.5 and 8
+hist(oecd$Feeling.safe.walking.alone.at.night)
+#not normally distirubted, sort of left skewedish
+hist(oecd$Homicide.rate)
+# max is 30
+hist(oecd$Employees.working.very.long.hours)
+#right skewed
+hist(oecd$Time.devoted.to.leisure.and.personal.care)
+#sort of left skewed
+```
+```{r oecdplots}
+plot(oecd$Housing.expenditure)
+plot(oecd$Rooms.per.person)
+plot(oecd$Dwellings.without.basic.facilities)
+plot(oecd$Household.net.adjusted.disposable.income)
+plot(oecd$Household.net.financial.wealth)
+plot(oecd$Labour.market.insecurity)
+plot(oecd$Employment.rate)
+plot(oecd$Long.term.unemployment.rate)
+plot(oecd$Personal.earnings)
+plot(oecd$Quality.of.support.network)
+plot(oecd$Educational.attainment)
+plot(oecd$Student.skills)
+plot(oecd$Years.in.education)
+plot(oecd$Air.pollution)
+plot(oecd$Water.quality)
+plot(oecd$Stakeholder.engagement.for.developing.regulations)
+plot(oecd$Voter.turnout)
+plot(oecd$Life.expectancy)
+plot(oecd$Self.reported.health)
+plot(oecd$Life.satisfaction)
+plot(oecd$Feeling.safe.walking.alone.at.night)
+plot(oecd$Homicide.rate)
+plot(oecd$Employees.working.very.long.hours)
+plot(oecd$Time.devoted.to.leisure.and.personal.care)
+
+```
+
+```{r oecdboxplot}
+boxplot(Life.satisfaction~Year,data=oecd, main="year and life satisfaction", 
+  	xlab="year", ylab="life satisfaction")
+# there is seemingly no difference based on year
+boxplot(Life.satisfaction~Country,data=oecd, main="country and life satisfaction", 
+  	xlab="country", ylab="life satisfaction")
+# interesting that on a scale of 1-10 it appears that no country went below 4 or above 8
+# if the scale was on the chart was 0-10 the countries would look more similar
+# it does seem like there is quite a bit of significant difference between countries
+
+
+
+
+```
+
+
+```{r data visualization}
+hist(oecd$Personal.earnings, xlab="Personal Earnings", main="Personal Earnings", col="lightgreen")
+boxplot(oecd$Personal.earnings, main="Personal Earnings", col="lightgreen")
+
+hist(oecd$Self.reported.health, xlab="Self Reported Health", main="Health", col="darkgoldenrod1")
+boxplot(oecd$Self.reported.health, main="Self Reported Health", col="darkgoldenrod1")
+
+hist(oecd$Air.pollution, xlab="micrograms per cubic meter", main="Air Pollution", col="gray")
+boxplot(oecd$Air.pollution, main="Air Pollution", col="gray")
+
+```
+
+```{r sd}
+sd(oecd$Housing.expenditure)
+sd(oecd$Rooms.per.person)
+sd(oecd$Dwellings.without.basic.facilities)
+sd(oecd$Household.net.adjusted.disposable.income)
+sd(oecd$Household.net.financial.wealth)
+sd(oecd$Labour.market.insecurity)
+sd(oecd$Employment.rate)
+sd(oecd$Long.term.unemployment.rate)
+sd(oecd$Personal.earnings)
+sd(oecd$Quality.of.support.network)
+sd(oecd$Educational.attainment)
+sd(oecd$Student.skills)
+sd(oecd$Years.in.education)
+sd(oecd$Air.pollution)
+sd(oecd$Water.quality)
+sd(oecd$Stakeholder.engagement.for.developing.regulations)
+sd(oecd$Voter.turnout)
+sd(oecd$Life.expectancy)
+sd(oecd$Self.reported.health)
+sd(oecd$Life.satisfaction)
+sd(oecd$Feeling.safe.walking.alone.at.night)
+sd(oecd$Homicide.rate)
+sd(oecd$Employees.working.very.long.hours)
+sd(oecd$Time.devoted.to.leisure.and.personal.care)
+
+```
+
+```{r corrplots}
+oecdused <- c("Life.satisfaction", "Life.expectancy", "Air.pollution", "Personal.earnings", "Rooms.per.person", "Employment.rate", "Household.net.adjusted.disposable.income", "Self.reported.health", "Years.in.education", "Homicide.rate")
+columnsubset <- oecd[oecdused]
+oecd_cor <- cor(columnsubset, method = "pearson")
+#install.packages("corrplot")
+ library(corrplot)
+##loadPkg(corrplot)
+corrplot(oecd_cor, method = "number", type = "lower")
+```
