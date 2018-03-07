@@ -1,0 +1,134 @@
+---
+title: "Assignment 2"
+author: "Krystin sinclair"
+date: "February 11, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r assignment2.1, echo=TRUE}
+#Question1. Use the summary function to get a summary of all the variables in the Pima.te dataset.
+library(MASS)
+summary(Pima.te)
+```
+```{r assignment2.2, echo=TRUE}
+#Question2. Get the structure of the Pima dataset.
+str(Pima.te)
+```
+```{r assignment2.3, echo=TRUE}
+#question 3. Get the variables from the dataset
+names(Pima.te)
+```
+
+```{r assignment2.4, echo=TRUE}
+#question4.For bmi and age variables find out the followings:
+#. Mean
+#. Median
+#. Maximum
+#. Minimum
+#. Range
+#. Number of observations
+summary(Pima.te$bmi)
+max(Pima.te$bmi) - min(Pima.te$bmi)
+sum(Pima.te$bmi > 0)
+summary(Pima.te$age)
+max(Pima.te$age)- min(Pima.te$age)
+sum(Pima.te$age >0)
+```
+```{r assignment2.5, echo=TRUE}
+#question5How many women are in this dataset?
+nrow(Pima.te)
+```
+```{r assigment2.6, echo=TRUE}
+#question6 Select the first 5 observations and first 4 columns/variables from the dataset. 
+Pima.te[1:5, 1:4]
+```
+```{r assignment2.7, echo=TRUE}
+#question7Select the records where bmi is greater than or equal to 50.
+greaterthanequalto50 <- Pima.te [ which(Pima.te$bmi >= 50), ]
+greaterthanequalto50
+```
+
+```{r assignment2.8, echo=TRUE}
+#question8.What percentage of the women have diabetes by WHO criteria.
+diabetes <- nrow(Pima.te [ which(Pima.te$type =='Yes'), ])
+total <- nrow(Pima.te)
+percent <- diabetes/total*100
+percentage_diabetic <- paste(round(percent), "%", sep="")
+percentage_diabetic
+```
+
+```{r assignment2.9, echo=TRUE}
+#question 9. Obtain a histogram for body mass index
+hist(Pima.te$bmi)
+```
+
+```{r assignment2.10, echo=TRUE}
+#question 10. What are the mean and median for bmi? How far apart are they?
+mean(Pima.te$bmi)
+median(Pima.te$bmi)
+mean(Pima.te$bmi) - median(Pima.te$bmi)
+```
+
+```{r assignment2.11, echo=TRUE}
+#question 11. Get data from "vlbw.csv" file.
+getwd()
+setwd("C:/Users/Krystin/Documents/GW/Science")
+vlbw = data.frame(read.csv("vlbw.csv"))
+```
+
+```{r assignment2.12, echo=TRUE}
+#question 12. Obtain a histogram of the length of stay, i.e. the number of day the infants stay in the neonatal
+#intensive care unit (variable hospstay).
+hist(vlbw$hospstay)
+```
+
+```{r assignment2.13, echo=TRUE}
+#question13. Do you see some data problems?
+#yes. There are very negative numbers in the length of stay variable. This is not possible. THere might be data entry issues or problems with this data set. There also seems to be a lot of outliers in the data set. It seems unlikely that a baby in neonatal care would spend over 4000 days in the hopsital. They would no longer be considered neonatal because they would have aged. The majority of the observations are in the bar just above 0, this aligns with expectations. 
+```
+
+```{r assignment2.14, echo=TRUE}
+#question14. Draw a boxplot for variable lowph. Visually estimate the median and quartiles from the plot
+boxplot(vlbw$lowph)
+# the median looks to be close to 7.2. 
+#the first quartile looks to be close to 7.1.
+# the third quartile looks to be close to 7.3.
+```
+
+```{r assignment2.15, echo=TRUE}
+#questionin15. Use the summary function to check your answers to the previous question. Is it about the same?
+summary(vlbw$lowph)
+#The actual median is what I guessed based on the visualization of the boxplot. 
+# the first quartile is slightly above what I guessed, but would round to my guess. 
+# the third quartile is in line with my guess. 
+```
+```{r assignment2.16, echo=TRUE}
+#question16. 
+#The variable lowph contains the lowest pH in the first 4 days of life. Obtain a histogram of this
+#variable (the variable is called lowph)
+hist(vlbw$lowph)
+```
